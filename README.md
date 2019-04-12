@@ -8,9 +8,9 @@ A simple app that shows the list of top contributors using Github API.
 
 
 Retrofit 2 and “OkHttp clients” libraries were used to connect to the server;<br />
-Retrofit library was chosen to work with REST API as it’s fast to configure and simple to work with.
+Retrofit library was chosen to work with REST API: as it’s fast to configure and simple to work with.
 
-UI/UX<br />
+UI/UX:<br />
 RecyclerView component was used to display data in a list view.
 
 Resources:<br />
