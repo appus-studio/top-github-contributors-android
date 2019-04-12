@@ -2,7 +2,6 @@ package appus.software.githubusers.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,13 +27,12 @@ class MainActivity : AppCompatActivity() {
             it.title =  "GitHubUsers: JetBrains/kotlin"
         }
         recycler.layoutManager = LinearLayoutManager(this)
-        showContr()
+        downloadContributors()
     }
 
-
-    fun showContr(){
+    //Download contributors on GitHub via [Retrofit lib] and
+    private fun downloadContributors(){
         loader.visibility = View.VISIBLE
-
         val call = GitHubClient().getGitHubServiceService().getContributors("JetBrains", "kotlin")
         call.enqueue(object: Callback<List<ContributorModel>> {
             override fun onFailure(call: Call<List<ContributorModel>>, t: Throwable) {
@@ -45,15 +43,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<ContributorModel>>, response: Response<List<ContributorModel>>) {
                 response.body()?.let {
                    val sortedList =  it.reversed().subList(0, 24).sortedBy { it.total }.reversed()
-                    recycler.adapter = GitHubAdapter(
-                        this@MainActivity,
-                        sortedList,
-                        object: ClickListener<ContributorModel>{
-                        override fun clicked(data: ContributorModel) {
-                            goToLocation(data.author.login?: "")
-                        }
-
-                    })
+                    showContributors(sortedList)
                     loader.visibility = View.GONE
                 }
             }
@@ -61,7 +51,20 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun goToLocation(login: String){
+    //Show contributors with as a list in RecyclerView
+    private fun showContributors(contributors: List<ContributorModel>){
+        recycler.adapter = GitHubAdapter(
+            this@MainActivity,
+            contributors,
+            object: ClickListener<ContributorModel>{
+                override fun clicked(data: ContributorModel) {
+                    downloadUserByLogin(data.author.login?: "")
+                }
+            })
+    }
+
+    //Download user by login name on GitHub via [Retrofit lib]
+    private fun downloadUserByLogin(login: String){
         loader.visibility = View.VISIBLE
         val call = GitHubClient().getGitHubServiceService().getUserData(login)
         call.enqueue(object: Callback<AuthorModel> {
@@ -74,10 +77,7 @@ class MainActivity : AppCompatActivity() {
                 response.body()?.let {
                     it.location?.let {
                         val address = it.replace(' ', '+').replace(",", "")
-                        val gmmIntentUri = Uri.parse("geo:0,0?q=$address")
-                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                        mapIntent.setPackage("com.google.android.apps.maps")
-                        startActivity(mapIntent)
+                        goToMap(address)
                     }
 
                     if (it.location == null || it.location.isEmpty()){
@@ -88,5 +88,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    //Open map with specific location
+    private fun goToMap(location: String){
+        val gmmIntentUri = Uri.parse("geo:0,0?q=$location")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        startActivity(mapIntent)
     }
 }

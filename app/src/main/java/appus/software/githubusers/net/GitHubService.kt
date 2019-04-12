@@ -5,7 +5,6 @@ import appus.software.githubusers.model.ContributorModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import java.util.*
 
 /**
  * Created by bogdan.martynov on 4/12/19 1:20 PM. gitHubUsers

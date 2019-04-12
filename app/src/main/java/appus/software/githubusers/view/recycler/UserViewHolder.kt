@@ -14,21 +14,13 @@ import kotlinx.android.synthetic.main.item_user.view.*
  */
 
 
-/*
-* Glide.with(view.context)
-            .asBitmap()
-            .load(url)
-            .apply(RequestOptions()
-                    .error(error))
-            .into(view)
-* */
-
+// ViewHolder Pattern
 class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    lateinit var container: LinearLayout
-    lateinit var ivAvatar: ImageView
-    lateinit var tvName: TextView
-    lateinit var tvCommitsCount: TextView
+    val container: LinearLayout
+    val ivAvatar: ImageView
+    val tvName: TextView
+    val tvCommitsCount: TextView
 
     init {
         container = view.findViewById(R.id.container)

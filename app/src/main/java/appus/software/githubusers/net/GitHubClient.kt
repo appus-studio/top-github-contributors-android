@@ -14,6 +14,13 @@ import java.util.concurrent.TimeUnit
  * Created by bogdan.martynov on 4/12/19 1:15 PM. gitHubUsers
  */
 
+
+/*
+  Technology:
+  Retrofit 2 - A type-safe HTTP client
+  OkHttp - An HTTP & HTTP/2 client
+*/
+
 class GitHubClient {
     private val BASE_URL = "https://api.github.com/"
     private val client: OkHttpClient

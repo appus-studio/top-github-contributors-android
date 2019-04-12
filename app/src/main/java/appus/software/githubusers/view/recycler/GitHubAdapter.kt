@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import appus.software.githubusers.R
 import appus.software.githubusers.model.ContributorModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 /**
  * Created by bogdan.martynov on 4/12/19 1:32 PM. gitHubUsers
@@ -28,18 +27,20 @@ class GitHubAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val contr = list[position]
+        val contributor = list[position]
 
         holder.container.setOnClickListener {
-            clickListener.clicked(contr)
+            clickListener.clicked(contributor)
         }
 
+        //Glide - An image loading and caching library
         Glide.with(context)
             .asBitmap()
-            .load(contr.author.avatar_url)
+            .load(contributor.author.avatar_url)
             .into(holder.ivAvatar)
-        holder.tvName.text = contr.author.login
-        holder.tvCommitsCount.text = contr.total.toString()
+
+        holder.tvName.text = contributor.author.login
+        holder.tvCommitsCount.text = contributor.total.toString()
     }
 
 
