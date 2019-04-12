@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         downloadContributors("JetBrains", "kotlin")
     }
 
-    //Download contributors on GitHub via [Retrofit lib] and
+    //Download contributors on GitHub via [Retrofit lib]
     private fun downloadContributors(repoOwner: String, repoName: String){
         loader.visibility = View.VISIBLE
         val call = GitHubClient().getGitHubServiceService().getContributors(repoOwner, repoName)
