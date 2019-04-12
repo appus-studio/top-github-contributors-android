@@ -27,15 +27,16 @@ class MainActivity : AppCompatActivity() {
             it.title =  "GitHubUsers: JetBrains/kotlin"
         }
         recycler.layoutManager = LinearLayoutManager(this)
-        downloadContributors()
+        downloadContributors("JetBrains", "kotlin")
     }
 
     //Download contributors on GitHub via [Retrofit lib] and
-    private fun downloadContributors(){
+    private fun downloadContributors(repoOwner: String, repoName: String){
         loader.visibility = View.VISIBLE
-        val call = GitHubClient().getGitHubServiceService().getContributors("JetBrains", "kotlin")
+        val call = GitHubClient().getGitHubServiceService().getContributors(repoOwner, repoName)
         call.enqueue(object: Callback<List<ContributorModel>> {
             override fun onFailure(call: Call<List<ContributorModel>>, t: Throwable) {
+                //Show error via Toast
                 Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
                 loader.visibility = View.GONE
             }
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         val call = GitHubClient().getGitHubServiceService().getUserData(login)
         call.enqueue(object: Callback<AuthorModel> {
             override fun onFailure(call: Call<AuthorModel>, t: Throwable) {
+                //Show error via Toast
                 Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
                 loader.visibility = View.GONE
             }
@@ -81,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     if (it.location == null || it.location.isEmpty()){
+                        //Show error via Toast
                         Toast.makeText(this@MainActivity, "The user does't have location.", Toast.LENGTH_LONG).show()
                     }
                 }
