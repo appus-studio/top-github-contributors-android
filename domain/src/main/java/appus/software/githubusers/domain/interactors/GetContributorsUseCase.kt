@@ -10,6 +10,10 @@ import io.reactivex.Observable
  * Created by bogdan.martynov on 2019-04-24 18:27. top-github-contributors-android
  */
 
+
+/**
+ * Use case for download list of contributors from GitHub and sort of downloaded data
+ **/
 class GetContributorsUseCase constructor(
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread,
@@ -18,14 +22,22 @@ class GetContributorsUseCase constructor(
 
     override fun buildUseCaseObservable(params: Params?): Observable<List<ContributorModel>> =
         mContributorsRepository.getContributors(params!!.repoOwner, params.repoName)
-                .map {
-                    val limit = when{
-                        it.isEmpty() -> 0
-                        it.size >= LIMIT -> LIMIT
-                        else -> it.size
-                    }.apply { it - 1 }
-                    it.reversed().subList(0, limit).sortedBy { it.total }.reversed()
-                }
+                .map(this::sortList)
+
+
+    /**
+     * Sort of contributors list: get first 25 contributors sort by count of commits
+     * @param list not sorted list from GitHub
+     * @return sorted list
+     */
+    private fun sortList(list:List<ContributorModel>):List<ContributorModel>{
+        val limit = when{
+            list.isEmpty() -> 0
+            list.size >= LIMIT -> LIMIT
+            else -> list.size
+        }.apply { this - 1 }
+        return list.reversed().subList(0, limit).sortedBy { it.total }.reversed()
+    }
 
     data class Params(val repoOwner: String, val repoName: String)
 

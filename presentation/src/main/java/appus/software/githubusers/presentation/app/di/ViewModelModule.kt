@@ -9,7 +9,9 @@ import org.koin.dsl.module.module
  * Created by bogdan.martynov on 2019-04-25 11:19. top-github-contributors-android
  */
 
-
+/**
+ * Module for injection viewModels
+ */
 val viewModelModule = module{
     viewModel { MainVM() }
     viewModel { ContributorsVM(get(), get()) }

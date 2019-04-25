@@ -10,6 +10,10 @@ import io.reactivex.Observable
  * Created by bogdan.martynov on 2019-04-24 18:32. top-github-contributors-android
  */
 
+
+/**
+ * Use case for download specific user from GitHub
+ **/
 class GetUserUseCase constructor(
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread,

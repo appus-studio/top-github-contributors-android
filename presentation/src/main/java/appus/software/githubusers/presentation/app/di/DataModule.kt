@@ -11,6 +11,10 @@ import org.koin.dsl.module.module
  * Created by bogdan.martynov on 2019-04-24 18:16. top-github-contributors-android
  */
 
+
+/**
+ * Module for injection data components
+ */
 val dataModule = module {
     single<ContributorsRepository> { ContributorsDataRepository(get()) }
     single<UserRepository> { UserDataRepository(get()) }

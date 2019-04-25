@@ -10,6 +10,10 @@ import org.koin.dsl.module.module
  * Created by bogdan.martynov on 2019-04-24 18:15. top-github-contributors-android
  */
 
+
+/**
+ * Module for injection app components
+ */
 val appModule = module {
     single<PostExecutionThread> { UIThread() }
     single<ThreadExecutor> { JobExecutor() }
