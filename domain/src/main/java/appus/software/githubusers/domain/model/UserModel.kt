@@ -6,7 +6,7 @@ package appus.software.githubusers.domain.model
  */
 
 data class UserModel(
-    val login: String?,
-    val id: Int?,
-    val avatar_url: String?,
-    val location: String?)
+        val login: String? = "",
+        val id: Int? = 0,
+        val avatarUrl: String? = "",
+        val location: String? = "")

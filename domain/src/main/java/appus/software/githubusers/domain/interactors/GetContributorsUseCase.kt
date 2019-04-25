@@ -18,6 +18,18 @@ class GetContributorsUseCase constructor(
 
     override fun buildUseCaseObservable(params: Params?): Observable<List<ContributorModel>> =
         mContributorsRepository.getContributors(params!!.repoOwner, params.repoName)
+                .map {
+                    val limit = when{
+                        it.isEmpty() -> 0
+                        it.size >= LIMIT -> LIMIT
+                        else -> it.size
+                    }.apply { it - 1 }
+                    it.reversed().subList(0, limit).sortedBy { it.total }.reversed()
+                }
 
     data class Params(val repoOwner: String, val repoName: String)
+
+    companion object{
+        private const val LIMIT = 25
+    }
 }

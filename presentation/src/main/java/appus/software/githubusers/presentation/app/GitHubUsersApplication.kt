@@ -1,10 +1,7 @@
 package appus.software.githubusers.presentation.app
 
 import android.app.Application
-import appus.software.githubusers.presentation.app.di.appModule
-import appus.software.githubusers.presentation.app.di.dataModule
-import appus.software.githubusers.presentation.app.di.netModule
-import appus.software.githubusers.presentation.app.di.useCasesModule
+import appus.software.githubusers.presentation.app.di.*
 import org.koin.android.ext.android.startKoin
 import org.koin.log.EmptyLogger
 
@@ -15,6 +12,12 @@ import org.koin.log.EmptyLogger
 class GitHubUsersApplication: Application(){
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(appModule, useCasesModule, dataModule, netModule), logger = EmptyLogger())
+        startKoin(this, listOf(
+            appModule,
+            useCasesModule,
+            dataModule,
+            netModule,
+            viewModelModule
+        ), logger = EmptyLogger())
     }
 }

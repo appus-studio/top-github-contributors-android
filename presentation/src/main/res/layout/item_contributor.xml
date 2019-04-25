@@ -1,35 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="horizontal"
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="appus.software.githubusers.domain.model.field.FieldAction" />
+        <import type="appus.software.githubusers.domain.model.field.Field" />
+
+        <variable
+            name="actionHandler"
+            type="appus.software.githubusers.presentation.common.recycler.OnRecyclerItemClick&lt;Field>" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="model"
+            type="appus.software.githubusers.domain.model.ContributorModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:id="@+id/container"
         android:gravity="center"
-android:padding="16dp">
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:actionHandler="@{actionHandler}"
+        app:data="@{model}"
+        app:action="@{FieldAction.CLICK}"
+        app:position="@{position}"
+        android:background="?android:attr/selectableItemBackground">
 
 
-    <ImageView
+        <ImageView
             android:id="@+id/ivAvatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:imageUrl="@{model.user.avatarUrl}"
+            app:error="@{@drawable/empty_drawable}"
+            tools:background="@color/colorAccent"/>
 
 
-    <TextView
+        <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp"
+            android:text="@{model.user.login}"
+            tools:text = "Name"/>
 
-    <View android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_weight="1"/>
-    <TextView
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
             android:id="@+id/tvCommitsCount"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(model.total)}"
+            tools:text = "1000"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

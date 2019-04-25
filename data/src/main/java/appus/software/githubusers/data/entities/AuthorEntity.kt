@@ -9,13 +9,13 @@ import com.google.gson.annotations.SerializedName
 
 data class AuthorEntity(
     @SerializedName("login")
-    val login: String?,
+    val login: String? = "",
     @SerializedName("id")
-    val id: Int?,
-    @SerializedName("avatarUrl")
-    val avatarUrl: String?,
+    val id: Int? = 0,
+    @SerializedName("avatar_url")
+    val avatarUrl: String? = "",
     @SerializedName("location")
-    val location: String?)
+    val location: String? = "")
 
 fun AuthorEntity.toModel(): UserModel{
     return UserModel(login, id, avatarUrl, location)
