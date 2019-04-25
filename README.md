@@ -5,20 +5,30 @@ Top Github Contributors Android
 Made in [![Appus Studio](https://github.com/appus-studio/top-github-contributors-android/blob/master/image/appus.png)](https://appus.software)
 
 A simple app that shows the list of top contributors using Github API.
-
-API:<br />
-Retrofit 2 and “OkHttp clients” libraries were used to connect to the server;<br />
-Retrofit library was chosen to work with REST API as it’s fast to configure and simple to work with.
-
-UI/UX:<br />
-RecyclerView component was used to display data in a list view.
-
-Resources:<br />
-Glide library was used to download images.
-
-Architecture:<br />
-MVC architecture was chosen because of its simplicity and fast realization.
-
+<br/>
+<br/>
+Language - Kotlin
+<br/>
+Architecture - MVVM (Model-ViewModel-View), Clean Architecture (3 modules: data(working with data), domain(logic of the app), presentation(ui part)).
+<br/>
+Work with REST API - Retrofit
+<br/>
+Asynchronous work, manage of threads - RxJava
+<br/>
+Dependency injection - Koin
+<br/>
+Work with UI  - DataBinding
+<br/>
+Tests - Espresso, Junit4
+<br/>
+Android Jetpack - Navigation, LiveData
+<br/>
+Download images - Glide
+<br/>
+Display data in a list view - RecyclerView.
+<br/>
+Worked with view of an item in a list with help AdapterDelegate.
+<br/>
 License
 --------
 
