@@ -9,25 +9,36 @@ A simple app that shows the list of top contributors using Github API.
 <br/>
 Language - Kotlin
 <br/>
+<br/>
 Architecture - MVVM (Model-ViewModel-View), Clean Architecture (3 modules: data(working with data), domain(logic of the app), presentation(ui part)).
+<br/>
 <br/>
 Work with REST API - Retrofit
 <br/>
+<br/>
 Asynchronous work, manage of threads - RxJava
+<br/>
 <br/>
 Dependency injection - Koin
 <br/>
+<br/>
 Work with UI  - DataBinding
+<br/>
 <br/>
 Tests - Espresso, Junit4
 <br/>
+<br/>
 Android Jetpack - Navigation, LiveData
+<br/>
 <br/>
 Download images - Glide
 <br/>
+<br/>
 Display data in a list view - RecyclerView.
 <br/>
+<br/>
 Worked with view of an item in a list with help AdapterDelegate.
+<br/>
 <br/>
 License
 --------
