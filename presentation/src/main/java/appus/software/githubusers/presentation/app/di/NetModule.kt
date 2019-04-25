@@ -1,8 +1,6 @@
 package appus.software.githubusers.presentation.app.di
 
 import appus.software.githubusers.data.net.RetrofitFactory
-import appus.software.githubusers.data.net.errors.ErrorFactory
-import appus.software.githubusers.data.net.errors.ErrorProvider
 import org.koin.dsl.module.module
 
 
@@ -12,5 +10,4 @@ import org.koin.dsl.module.module
 
 val netModule = module {
     single { RetrofitFactory.getGitHubApi() }
-    single<ErrorProvider> { ErrorFactory() }
 }
