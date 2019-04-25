@@ -16,6 +16,12 @@ import com.bumptech.glide.request.RequestOptions
  * Created by bogdan.martynov on 2019-04-25 12:48. top-github-contributors-android
  */
 
+/**
+ * @param actionHandler OnRecyclerItemClick
+ * @param data Data of item
+ * @param action Action when clicked
+ * @param position Position of the clicked item
+ */
 @BindingAdapter("actionHandler", "data", "action", "position")
 fun fieldActionClick(view: View,
                      actionHandler: OnRecyclerItemClick<Field>,
@@ -28,6 +34,11 @@ fun fieldActionClick(view: View,
     }
 }
 
+
+/**
+ * @param url Image url for downloading from internet
+ * @param error Error drawable if image not downloaded
+ */
 @BindingAdapter("imageUrl", "error")
 fun loadImage(view: ImageView, url: String?, error: Drawable) {
     Glide.with(view.context)
@@ -37,6 +48,10 @@ fun loadImage(view: ImageView, url: String?, error: Drawable) {
             .into(view)
 }
 
+
+/**
+ * @param configBuilder Builder for ListConfig
+ */
 @BindingAdapter("listConfig")
 fun configRecyclerView(recyclerView: RecyclerView, configBuilder: ListConfig.Builder<Field>?) {
     if (configBuilder == null) return

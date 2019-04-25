@@ -16,10 +16,18 @@ import appus.software.githubusers.presentation.views.base.BaseFragment
 class ContributorsView : BaseFragment<FragmentContributorsBinding, ContributorsVM>(ContributorsVM::class) {
     override val layoutId: Int = R.layout.fragment_contributors
 
+
+    /**
+     * function for initViews
+     */
     override fun initViews() {
         vm.showUserLocation.observe(this, Observer(this::goToMap))
     }
 
+
+    /**
+     * @param location Address which put to google map app
+     */
     private fun goToMap(location: String){
         val gmmIntentUri = Uri.parse("geo:0,0?q=$location")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)

@@ -8,5 +8,10 @@ import io.reactivex.Observable
  */
 
 interface ContributorsRepository {
+    /**
+     * Download contributors from specific repository from GitHub
+     * @param repoOwner Owner name of a repository on GitHub
+     * @param repoName Name of repository
+     */
     fun getContributors(repoOwner: String, repoName: String): Observable<List<ContributorModel>>
 }

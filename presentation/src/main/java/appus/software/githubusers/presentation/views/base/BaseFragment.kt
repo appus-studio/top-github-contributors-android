@@ -24,16 +24,11 @@ abstract class BaseFragment<D : ViewDataBinding, ViewModelType : BaseViewModel>(
 
 
     protected lateinit var viewDataBinding: D
-
     open val vm: ViewModelType  by viewModelByClass(clazz)
-
     protected lateinit var navController: NavController
-
     protected val bindingViewModelId: Int = BR.vm
-
     @get:LayoutRes
     abstract val layoutId: Int
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,13 +40,16 @@ abstract class BaseFragment<D : ViewDataBinding, ViewModelType : BaseViewModel>(
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         attachFragmentViews(view)
         initViews()
     }
 
+
+    /**
+     * @param viewDataBinding ViewDataBinding data of a screen
+     */
     protected open fun performDataBinding(viewDataBinding: D) {
         viewDataBinding.setVariable(bindingViewModelId, vm)
         this.viewDataBinding.executePendingBindings()
@@ -59,6 +57,11 @@ abstract class BaseFragment<D : ViewDataBinding, ViewModelType : BaseViewModel>(
 
     protected open fun initViews(){}
 
+
+    /**
+     * Attach data for a screen
+     * @param view View of specific screen
+     */
     protected open fun attachFragmentViews(view: View) {
         performDataBinding(viewDataBinding)
         lifecycle.addObserver(vm)
@@ -67,10 +70,19 @@ abstract class BaseFragment<D : ViewDataBinding, ViewModelType : BaseViewModel>(
         navController = NavHostFragment.findNavController(this)
     }
 
+    /**
+     * Show toast message
+     * @param toastModel Model with settings for toast
+     */
     override fun showToast(toastModel: ToastModel) {
         (activity as BaseView).showToast(toastModel)
     }
 
+
+    /**
+     * Screen navigation
+     * @param navModel Model with settings for navController
+     */
     override fun navigateTo(navModel: NavigationModel) {
         when {
             navModel.popBack -> navController.navigateUp()

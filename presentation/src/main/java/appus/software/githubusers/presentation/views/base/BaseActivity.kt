@@ -1,25 +1,17 @@
 package appus.software.githubusers.presentation.views.base
 
-import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import appus.software.githubusers.BR
-import appus.software.githubusers.R
 import appus.software.githubusers.presentation.views.base.model.NavigationModel
-import appus.software.githubusers.presentation.views.base.model.ProgressModel
 import appus.software.githubusers.presentation.views.base.model.ToastModel
-import kotlinx.android.synthetic.main.progress_bar.*
 import org.koin.androidx.viewmodel.ext.android.viewModelByClass
 import kotlin.reflect.KClass
 
@@ -67,6 +59,10 @@ abstract class BaseActivity<D : ViewDataBinding, ViewModelType : BaseViewModel>(
     protected open fun attachViews() {
     }
 
+
+    /**
+     * @param viewDataBinding ViewDataBinding data of a screen
+     */
     protected fun performDataBinding(viewDataBinding: D) {
         viewDataBinding.setVariable(bindingViewModelId, vm)
     }
@@ -76,6 +72,12 @@ abstract class BaseActivity<D : ViewDataBinding, ViewModelType : BaseViewModel>(
         lifecycle.removeObserver(vm)
     }
 
+
+
+    /**
+     * Show toast message
+     * @param toastModel Model with settings for toast
+     */
     override fun showToast(toastModel: ToastModel) {
         val message: String? = if (toastModel.idResMessage != null) {
             getString(toastModel.idResMessage!!)
@@ -88,7 +90,10 @@ abstract class BaseActivity<D : ViewDataBinding, ViewModelType : BaseViewModel>(
     }
 
 
-
+    /**
+     * Screen navigation
+     * @param navModel Model with settings for navController
+     */
     override fun navigateTo(navModel: NavigationModel) {
     }
 

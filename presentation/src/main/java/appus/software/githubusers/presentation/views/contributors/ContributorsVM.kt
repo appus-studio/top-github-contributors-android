@@ -43,11 +43,18 @@ class ContributorsVM (
             .setDefaultDividerEnabled(true)
     }
 
+    /**
+     * Calls when user use pull to refresh
+     */
     fun refresh(){
         showPullToRefresh.value = false
         loadContributors(true)
     }
 
+    /**
+     * Download contributors from specific repository from GitHub
+     * @param refresh Param for force downloading data
+     */
     private fun loadContributors(refresh: Boolean) {
         if (!refresh) {
             if (listConfig.adapter.itemCount > 0 || showPullToRefresh.value == true) return
@@ -72,10 +79,18 @@ class ContributorsVM (
         }, GetContributorsUseCase.Params(REPO_OWNER, REPO_NAME))
     }
 
+    /**
+     * Show contributors list data
+     * @param contributors list of Contributors
+     */
     private fun showContributors(contributors: List<ContributorModel>){
         listConfig.listDelegateAdapter.updateItems(contributors)
     }
 
+    /**
+     * Download specific data about user on GitHub by the user's login
+     * @param userName login of a user on GitHub
+     */
     private fun loadUserData(userName: String){
         mGetUserUseCase.execute(object: ResponseObservable<UserModel>(){
             override fun onNext(t: UserModel) {
@@ -93,6 +108,10 @@ class ContributorsVM (
         }, GetUserUseCase.Params(userName))
     }
 
+    /**
+     * Click listener from recyclerView
+     * @param field model of the clicked item
+     */
     private fun onItemClicked(field: Field){
         when(field.fieldType){
             FieldType.CONTRIBUTOR -> {
@@ -101,6 +120,7 @@ class ContributorsVM (
             }
         }
     }
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart(){

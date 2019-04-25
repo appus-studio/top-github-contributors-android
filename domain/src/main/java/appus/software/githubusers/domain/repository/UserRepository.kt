@@ -8,5 +8,9 @@ import io.reactivex.Observable
  */
 
 interface UserRepository {
+    /**
+     * Download specific data about user on GitHub by the user's login
+     * @param userName login of a user on GitHub
+     */
     fun getUser(userName: String): Observable<UserModel>
 }

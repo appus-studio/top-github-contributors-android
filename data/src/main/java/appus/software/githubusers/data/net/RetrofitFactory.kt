@@ -7,8 +7,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitFactory {
-    const val BASE_URL = "https://api.github.com/"
+    private const val BASE_URL = "https://api.github.com/"
 
+    /**
+     * Retrofit initialization
+     */
     private val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -16,6 +19,10 @@ object RetrofitFactory {
             .client(provideHttpClient().build())
             .build()
 
+
+    /**
+     * Provide OkHttpClient
+     */
     private fun provideHttpClient(): OkHttpClient.Builder {
         return OkHttpClient.Builder().apply {
             addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
@@ -23,10 +30,9 @@ object RetrofitFactory {
     }
 
 
-    //APIs
+    /**
+     * Provide GitHubAPI
+     */
     fun getGitHubApi(): GitHubAPI = retrofit.create(GitHubAPI::class.java)
 
-
-    //.addCallAdapterFactory(RxJava2CallAdapterFactory.createWithErrorResponseChecker(netErrorChecker))
-    /*.apply { responseBodyConverter<Any>(APIError::class.java, arrayOfNulls(0)) }*/
 }

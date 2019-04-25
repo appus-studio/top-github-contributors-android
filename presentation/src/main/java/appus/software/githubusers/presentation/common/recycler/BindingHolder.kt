@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 open class BindingHolder<VB : ViewDataBinding> constructor(val binding: VB) : RecyclerView.ViewHolder(binding.root) {
     companion object {
+
+        /**
+         * @param viewDataBinding ViewDataBinding
+         */
         fun <VB : ViewDataBinding> newInstance(viewDataBinding: VB): BindingHolder<VB> {
             return BindingHolder(viewDataBinding)
         }

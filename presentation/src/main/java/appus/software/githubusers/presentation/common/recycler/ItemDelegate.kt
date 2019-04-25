@@ -24,6 +24,8 @@ class ItemDelegate constructor(private val mViewType: FieldType, @LayoutRes priv
         return holder
     }
 
+
+
     @NonNull
     override fun onBindViewHolder(@NonNull item: Field,
                                   @NonNull holder: BindingHolder<ViewDataBinding>,
